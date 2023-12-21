@@ -47,14 +47,10 @@ const Export = () => {
     setData(dataDefault);
   };
 
-  console.log("listData", listData);
-
   const downloadJsonFile = (data, filename) => {
     const blob = new Blob([JSON.stringify(data, null, 2)], {
       type: "application/json",
     });
-    console.log("filename", filename);
-
     const href = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = href;
@@ -145,15 +141,23 @@ const Export = () => {
         {listData?.map((ele, idx) => (
           <div key={idx}>
             <div className="flex flex-row justify-between items-center">
-              <span className="flex justify-center text-xl mb-1 grow">{`Bingo ${
+              <span className="flex text-xl mb-1 grow">{`Bingo ${
                 idx + 1
               }`}</span>
-              <span
-                className="text-red-900 cursor-pointer text-xs"
-                onClick={() => handleDelete(idx)}
-              >
-                Xóa
-              </span>
+              <div className="flex flex-row items-center gap-2">
+                <span
+                  className="text-blue-600 cursor-pointer text-xs"
+                  onClick={() => handleDelete(idx)}
+                >
+                  Sửa
+                </span>
+                <span
+                  className="text-red-600 cursor-pointer text-xs"
+                  onClick={() => handleDelete(idx)}
+                >
+                  Xóa
+                </span>
+              </div>
             </div>
             <Table
               showHeader={false}
