@@ -5,7 +5,7 @@ import {
   getDiagonalNumberArray,
   getHorizontalNumberArray,
   getVerticalNumberArray,
-} from "./helps";
+} from "../helpers";
 
 const ECO_VALUE = "E";
 
@@ -68,8 +68,6 @@ const InputTable = () => {
       const jsonData = JSON.parse(content);
       listDataDefault.current = jsonData?.data;
       setListData(jsonData?.data);
-      console.log("Parsed JSON data:", jsonData);
-      // Thực hiện thêm các xử lý với jsonData nếu cần
     } catch (e) {}
   };
 

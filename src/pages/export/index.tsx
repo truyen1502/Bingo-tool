@@ -75,8 +75,6 @@ const Export = () => {
       const jsonData = JSON.parse(content);
       listDataDefault.current = jsonData?.data;
       setListData(jsonData?.data);
-      console.log("Parsed JSON data:", jsonData);
-      // Thực hiện thêm các xử lý với jsonData nếu cần
     } catch (e) {}
   };
 
@@ -92,7 +90,7 @@ const Export = () => {
   };
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 mb-5">
       <div className="mb-3">
         <div className="mb-1 mt-2">Tải file json cũ: (Nếu có)</div>
         <Upload
@@ -117,10 +115,12 @@ const Export = () => {
         placeholder="Nhập tên file json"
         className="mb-4"
       />
+      <div className="mb-1">Thêm mới Bingo:</div>
       <Table
         style={{
           maxWidth: 400,
         }}
+        showHeader={false}
         dataSource={dataSource}
         columns={columns}
         pagination={false}
@@ -130,11 +130,12 @@ const Export = () => {
       <Button className="mt-2" onClick={handleSubmit}>
         Add
       </Button>
-      <div className="flex flex-row items-center justify-between">
-        <div className="mt-5 text-lg mb-2">{`Total: ${listData?.length}`}</div>
+      <div className="flex flex-row items-center justify-between mt-4 mb-1">
+        <div className="text-lg">{`Total: ${listData?.length}`}</div>
         <Button
           className="mr-10"
           onClick={() => downloadJsonFile(dataExport, valueInput)}
+          disabled={listData?.length === 0}
         >
           Export
         </Button>
@@ -142,7 +143,7 @@ const Export = () => {
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 items-center">
         {listData?.map((ele, idx) => (
-          <div>
+          <div key={idx}>
             <div className="flex flex-row justify-between items-center">
               <span className="flex justify-center text-xl mb-1 grow">{`Bingo ${
                 idx + 1
@@ -182,7 +183,7 @@ const Export = () => {
               }))}
               pagination={false}
               bordered
-              size="middle"
+              size="small"
             />
           </div>
         ))}
